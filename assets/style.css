@@ -36,7 +36,9 @@ h2 {
 }
 
 .row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-rows: 1fr;
   white-space: pre-wrap;
   height: 80px;
   border-bottom: 20px solid white;
