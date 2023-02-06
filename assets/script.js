@@ -5,46 +5,55 @@ const currentTime = moment().format('HH mm A')
 let buttonCount = 0;
 
 let buttons = [$('#btn1'), $('#btn2'), $('#btn3'), $('#btn4'), $('#btn5'), $('#btn6'), $('#btn7'), $('#btn8')];
+let inputs = [$('#1'), $('#2'), $('#3'), $('#4'), $('#5'), $('#6'), $('#7'), $('#8')];
 
 let timeBlocks = [
     time1 = {
         time: moment('09:00', 'HH mm A'),
         id: '#1',
+        index: '1',
         buttonId: '#btn1'
     },
     time2 = {
         time: moment('10:00', 'HH mm A'),
         id: '#2',
+        index: '2',
         buttonId: '#btn2'
     },
     time3 = {
         time: moment('11:00', 'HH mm A'),
         id: '#3',
+        index: '3',
         buttonId: '#btn3'
     },
     time4 = {
         time: moment('12:00', 'HH mm A'),
         id: '#4',
+        index: '4',
         buttonId: '#btn4'
     },
     time5 = {
         time: moment('13:00', 'HH mm A'),
         id: '#5',
+        index: '5',
         buttonId: '#btn5'
     },
     time6 = {
         time: moment('14:00', 'HH mm A'),
         id: '#6',
+        index: '6',
         buttonId: '#btn6'
     },
     time7 = {
         time: moment('15:00', 'HH mm A'),
         id: '#7',
+        index: '7',
         buttonId: '#btn7'
     },
     time8 = {
         time: moment('16:00', 'HH mm A'),
         id: '#8',
+        index: '8',
         buttonId: '#btn8'
     }
 ];
@@ -53,8 +62,8 @@ let userEvents = [];
 
 
 function init() {
-    console.log(currentTime);
-
+    userEvents = JSON.parse(localStorage.getItem('userData'));
+    console.log(currentTime);   
     $('#currentDay').text(currentDay.format('dddd Do MMM YYYY'));
 
 
@@ -86,10 +95,27 @@ function init() {
 
 
 
-    if(userEvents != null){for(let i = 0; i < userEvents.length; i++){
-        let input = $('#' + (i + 1));
-        input.val(data[i].text);
-    }}
+    if(localStorage.getItem(('userData')) != null){
+        console.log('User events is not null');
+        console.log(localStorage.getItem('userData'));
+        console.log(userEvents);
+        var d = JSON.parse(localStorage.getItem('userData'));
+        console.log(d); 
+        for(let i = 0; i < d.length; i++){
+            console.log('workinnnnn');
+            let inputIndex = d[i].id;
+            console.log(inputIndex);
+            //THIS IS A STRING ^
+            if (inputIndex == timeBlocks[i].index){
+                //PROBLEM HERE IS THAT THE ARRAY IS NOT SORTED
+                //SO IT WILL ONLY WORK IF THE INPUT FIELDS ARE COMPLETED IN ORDER. NOT USEFUL
+                // CREATE A SWITCH STATEMENT THAT EVALUATES WHICH ID FITS INTO WHICH INPUT BOX
+                // FURTHER MORE FIX THE BUG WHERE THE DATA IS BEING WIPED 
+                // ALSO REPLACE AN OBJECT IN THE LOCAL STORAGE IF ITS INDEX ALREADY EXISTS. WE DO NOT WANT MULTIPLE FIELDS.
+                inputs[i].val(d[i].text);
+                console.log(inputs[i]);
+            }
+    }}  
 
 
 }
@@ -110,6 +136,7 @@ function onClick(){
 //SAVES DATA IN LOCAL STORAGE
 function saveData(){
     localStorage.setItem('userData', JSON.stringify(userEvents));
+    console.log(localStorage.getItem('userData'));
 }
 
 init();
