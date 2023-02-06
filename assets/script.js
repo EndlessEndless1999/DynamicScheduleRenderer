@@ -63,7 +63,14 @@ let userEvents = [];
 
 
 function init() {
-    userEvents = JSON.parse(localStorage.getItem('userData'));
+
+
+    if (localStorage.getItem('userData') != null){
+        userEvents = JSON.parse(localStorage.getItem('userData'));
+    }else{
+        localStorage.setItem('userData', userEvents);
+    }
+    
 
     userEvents.sort(function(a, b){
         if (a.id < b.id) return -1;
@@ -88,7 +95,7 @@ function init() {
         if (timeBlocks[i].time.isAfter(currentDay, 'minute')){
             console.log(timeBlocks[i].time + ' is after this time')
             $(timeBlocks[i].id).addClass('future');
-        }else if(timeBlocks.time.isBefore(currentDay, 'minute')){
+        }else if(timeBlocks[i].time.isBefore(currentDay, 'minute')){
             $(timeBlocks[i].id).addClass('past')
         }
     }
@@ -111,20 +118,43 @@ function init() {
         console.log(localStorage.getItem('userData'));
         console.log(userEvents);
         var d = JSON.parse(localStorage.getItem('userData'));
+        d.sort(function(a, b){
+            if (a.id < b.id) return -1;
+            if (a.id > b.id) return 1;
+            return 0;
+        });
         console.log(d); 
         for(let i = 0; i < d.length; i++){
             console.log('workinnnnn');
             let inputIndex = d[i].id;
             console.log(inputIndex);
             //THIS IS A STRING ^
-            if (inputIndex == timeBlocks[i].index){
-                //PROBLEM HERE IS THAT THE ARRAY IS NOT SORTED
-                //SO IT WILL ONLY WORK IF THE INPUT FIELDS ARE COMPLETED IN ORDER. NOT USEFUL
-                // CREATE A SWITCH STATEMENT THAT EVALUATES WHICH ID FITS INTO WHICH INPUT BOX
-                // FURTHER MORE FIX THE BUG WHERE THE DATA IS BEING WIPED 
-                // ALSO REPLACE AN OBJECT IN THE LOCAL STORAGE IF ITS INDEX ALREADY EXISTS. WE DO NOT WANT MULTIPLE FIELDS.
-                inputs[i].val(d[i].text);
-                console.log(inputs[i]);
+            switch (inputIndex){
+                case '1':
+                    inputs[0].val(d[i].text);
+                    break;
+                case '2':
+                    inputs[1].val(d[i].text);
+                    break;
+                case '3':
+                    inputs[2].val(d[i].text);
+                    break;
+                case '4':
+                    inputs[3].val(d[i].text);
+                    break;
+                case '5':
+                    inputs[4].val(d[i].text);
+                    break;
+                case '6':
+                    inputs[5].val(d[i].text);
+                    break;
+                case '7':
+                    inputs[6].val(d[i].text);
+                    break;
+                case '8':
+                    inputs[7].val(d[i].text);
+                    break;
+            
             }
     }}  
 

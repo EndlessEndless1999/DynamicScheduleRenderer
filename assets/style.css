@@ -52,12 +52,12 @@ h2 {
 }
 
 .past {
-  background-color: #d3d3d3;
+  background-color: red;
   color: white;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: purple;
   color: white;
 }
 
