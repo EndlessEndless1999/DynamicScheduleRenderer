@@ -16,6 +16,7 @@ textarea {
 h2 {
   border: black;
   border-style: solid;
+  margin-bottom: 0rem;
 }
 
 .jumbotron {
