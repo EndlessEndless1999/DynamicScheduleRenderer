@@ -61,8 +61,19 @@ let timeBlocks = [
 let userEvents = [];
 
 
+
 function init() {
     userEvents = JSON.parse(localStorage.getItem('userData'));
+
+    userEvents.sort(function(a, b){
+        if (a.id < b.id) return -1;
+        if (a.id > b.id) return 1;
+        return 0;
+    });
+
+    console.log(userEvents);
+
+
     console.log(currentTime);   
     $('#currentDay').text(currentDay.format('dddd Do MMM YYYY'));
 
