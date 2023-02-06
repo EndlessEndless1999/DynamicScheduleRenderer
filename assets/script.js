@@ -64,14 +64,14 @@ let userEvents = [];
 
 function init() {
 
-
+    //Checks if user data exists. Creates it if it does not exist. Otherwise sets local variable UserEvents to the contents of localStorage array
     if (localStorage.getItem('userData') != null){
         userEvents = JSON.parse(localStorage.getItem('userData'));
     }else{
         localStorage.setItem('userData', userEvents);
     }
     
-
+    //Sorts Array via ID
     userEvents.sort(function(a, b){
         if (a.id < b.id) return -1;
         if (a.id > b.id) return 1;
@@ -82,6 +82,7 @@ function init() {
 
 
     console.log(currentTime);   
+    //Sets Date at Top of Webpage
     $('#currentDay').text(currentDay.format('dddd Do MMM YYYY'));
 
 
@@ -112,7 +113,10 @@ function init() {
 
 
 
-
+    //Checks if localStorage Exists
+    //Gets array from localStorage
+    //Sorts array so that they are in order of time
+    //Switch statement evaluates which timeblock events are displayed in via object id property
     if(localStorage.getItem(('userData')) != null){
         console.log('User events is not null');
         console.log(localStorage.getItem('userData'));
@@ -160,7 +164,7 @@ function init() {
 
 
 }
-
+//Checks if event already exists in timeblock and erases if does. Then pushes new event object to localStorage Array
 function onClick(){
     input = this.getAttribute('input');
     inputField = $('#' + input).val();
