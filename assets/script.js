@@ -169,6 +169,13 @@ function onClick(){
         text: inputField,
         id: input
     }
+
+    for(let i = 0; i < userEvents.length; i++){
+        if(event.id === userEvents[i].id){
+            userEvents.splice(userEvents[i], 1);
+        }
+    }
+
     console.log(event);
     userEvents.push(event);
     saveData();
@@ -176,6 +183,9 @@ function onClick(){
 
 //SAVES DATA IN LOCAL STORAGE
 function saveData(){
+
+
+
     localStorage.setItem('userData', JSON.stringify(userEvents));
     console.log(localStorage.getItem('userData'));
 }
